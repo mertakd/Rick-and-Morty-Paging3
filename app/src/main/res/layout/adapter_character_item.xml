@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginTop="16dp"
+    app:cardCornerRadius="@dimen/rounded_image_corner_radius">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/character_image_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            tools:src="@drawable/ic_rick_and_morty_test" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="#cc000000">
+
+            <TextView
+                android:id="@+id/character_name_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="4dp"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                tools:text="Lorem ipsum dolor amet, lorem ipsum dolor amet, lorem ipsum " />
+        </FrameLayout>
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
