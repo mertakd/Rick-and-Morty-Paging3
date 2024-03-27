@@ -4,18 +4,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    android:orientation="vertical">
+    >
 
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="332dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -24,7 +23,7 @@
             android:id="@+id/nameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_marginStart="16dp"
             android:textColor="?attr/colorOnBackground"
             android:textSize="28sp"
             android:textStyle="bold"
@@ -61,23 +60,24 @@
 
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginTop="16dp"
+        android:layout_marginBottom="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.0">
+        >
 
         <TextView
             android:id="@+id/episodeCarouselTitle"
-            android:layout_width="match_parent"
+            style="@style/TextAppearance.AppCompat.Headline"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Episodes"
-            android:layout_marginStart="5dp"
+            android:layout_marginStart="16dp"
             android:textSize="24sp"
             android:textStyle="bold"/>
 
@@ -92,11 +92,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="8dp"
             android:text="Origin"
+            style="@style/TextAppearance.AppCompat.Headline"
             android:textColor="?attr/colorOnBackground"
             android:textSize="24sp"
-            android:textStyle="italic" />
+            android:textStyle="bold" />
 
 
         <TextView
@@ -106,7 +107,8 @@
             android:layout_marginStart="16dp"
             android:textColor="?attr/colorOnBackground"
             android:textSize="18sp"
-            tools:text="Earth" />
+            tools:text="Earth"
+            android:textStyle="italic"/>
 
 
         <TextView
@@ -114,11 +116,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="8dp"
             android:text="Species"
+            style="@style/TextAppearance.AppCompat.Headline"
             android:textColor="?attr/colorOnBackground"
             android:textSize="24sp"
-            android:textStyle="italic" />
+            android:textStyle="bold" />
 
 
         <TextView
@@ -128,6 +131,7 @@
             android:layout_marginStart="16dp"
             android:textColor="?attr/colorOnBackground"
             android:textSize="18sp"
+            android:textStyle="italic"
             tools:text="Human" />
 
 
@@ -136,11 +140,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="8dp"
             android:text="Gender"
+            style="@style/TextAppearance.AppCompat.Headline"
+            android:textStyle="bold"
             android:textColor="?attr/colorOnBackground"
             android:textSize="24sp"
-            android:textStyle="italic" />
+            />
 
 
         <TextView
@@ -150,7 +156,10 @@
             android:layout_marginStart="16dp"
             android:textColor="?attr/colorOnBackground"
             android:textSize="18sp"
-            tools:text="Male" />
+            tools:text="Male"
+            android:textStyle="italic"
+
+            android:layout_marginBottom="16dp"/>
 
 
 

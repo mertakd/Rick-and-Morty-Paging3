@@ -13,9 +13,11 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.sisifos.rickyandmortypaging3.R
 import com.sisifos.rickyandmortypaging3.databinding.FragmentEpisodeDetailBottomSheetBinding
 import com.sisifos.rickyandmortypaging3.ui.episode.detail.adapter.EpisodeDetailAdapter
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 
+@AndroidEntryPoint
 class EpisodeDetailBottomSheetFragment : BottomSheetDialogFragment() {
 
     private var _binding: FragmentEpisodeDetailBottomSheetBinding? = null

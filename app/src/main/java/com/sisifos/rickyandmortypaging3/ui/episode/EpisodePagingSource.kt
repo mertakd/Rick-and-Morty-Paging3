@@ -2,35 +2,41 @@ package com.sisifos.rickyandmortypaging3.ui.episode
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import com.sisifos.rickyandmortypaging3.domain.mappers.CharacterMapper
 import com.sisifos.rickyandmortypaging3.domain.mappers.EpisodeMapper
-import com.sisifos.rickyandmortypaging3.domain.models.Episode
-import com.sisifos.rickyandmortypaging3.network.NetworkLayer
+import com.sisifos.rickyandmortypaging3.network.RickAndMortyService
 
+
+private const val GITHUB_STARTING_PAGE_INDEX = 1
 class EpisodePagingSource(
-    private val repository: EpisodeRepository
+    private val rickAndMortyService: RickAndMortyService
 ): PagingSource<Int, EpisodesUiModel>() {
 
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, EpisodesUiModel> {
-        val pageNumber = params.key ?: 1
-        val previousKey = if (pageNumber == 1) null else pageNumber.minus(1)
 
-        val pageRequest = NetworkLayer.apiClient.getEpisodesPage(pageNumber)
+        try {
+            val pageNumber = params.key ?: GITHUB_STARTING_PAGE_INDEX
+            val previousKey = if (pageNumber == 1) null else pageNumber - 1
 
-        pageRequest.exception?.let {
-            return LoadResult.Error(it)
+
+            val episodeResponse = rickAndMortyService.getEpisodesPage(
+                pageIndex = pageNumber
+            )
+
+            val characters = episodeResponse.results?.map { response ->
+                EpisodesUiModel.Item(EpisodeMapper.buildFrom(response))
+            } ?: emptyList()
+
+            return LoadResult.Page(
+                data = characters,
+                prevKey = previousKey,
+                nextKey = getPageIndexFromNext(episodeResponse.info.next)
+            )
+        } catch (e: Exception) {
+            return LoadResult.Error(e)
         }
-
-        return LoadResult.Page(
-            data = pageRequest.body.results.map { response ->
-                 EpisodesUiModel.Item(EpisodeMapper.buildFrom(response))
-            },
-            prevKey = previousKey,
-            nextKey = getPageIndexFromNext(pageRequest.body.info.next)
-
-        )
     }
-
 
 
 
@@ -44,7 +50,6 @@ class EpisodePagingSource(
             anchorPage?.prevKey?.plus(1) ?: anchorPage?.nextKey?.minus(1)
         }
     }
-
 
 
 

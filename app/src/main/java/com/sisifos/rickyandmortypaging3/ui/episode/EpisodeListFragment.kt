@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -12,18 +11,14 @@ import androidx.navigation.fragment.findNavController
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sisifos.rickyandmortypaging3.R
-import com.sisifos.rickyandmortypaging3.databinding.FragmentCharacterListBinding
 import com.sisifos.rickyandmortypaging3.databinding.FragmentEpisodeListBinding
-import com.sisifos.rickyandmortypaging3.domain.models.Character
-import com.sisifos.rickyandmortypaging3.domain.models.Episode
 import com.sisifos.rickyandmortypaging3.ui.episode.adapter.EpisodesPagingAdapter
-import com.sisifos.rickyandmortypaging3.ui.characters.home.CharacterListFragmentDirections
-import com.sisifos.rickyandmortypaging3.ui.characters.home.adapter.CharactersPagingAdapter
-import com.sisifos.rickyandmortypaging3.ui.characters.home.adapter.CharactersUiModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 
+@AndroidEntryPoint
 class EpisodeListFragment : Fragment(R.layout.fragment_episode_list) {
 
     private var _binding: FragmentEpisodeListBinding? = null
@@ -52,8 +47,9 @@ class EpisodeListFragment : Fragment(R.layout.fragment_episode_list) {
 
 
         lifecycleScope.launch {
-            viewModel.flow.collectLatest { episodePagingData: PagingData<EpisodesUiModel> ->
+            viewModel.getAllEpisodeStream().collectLatest { episodePagingData: PagingData<EpisodesUiModel> ->
                 episodesItemSelectedAdapter.submitData(episodePagingData)
+
             }
         }
 
@@ -74,7 +70,7 @@ class EpisodeListFragment : Fragment(R.layout.fragment_episode_list) {
 
 
 
-    var episodesItemSelectedAdapter = EpisodesPagingAdapter().apply {
+    private var episodesItemSelectedAdapter = EpisodesPagingAdapter().apply {
         setOnEpisodeItemClickListener { position ->
             val selectedEpisode = getItemAtPosition(position) as? EpisodesUiModel.Item
             selectedEpisode?.let {

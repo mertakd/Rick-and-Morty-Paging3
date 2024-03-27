@@ -1,11 +1,12 @@
 package com.sisifos.rickyandmortypaging3.ui.characters.detail.adapter
 
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import com.sisifos.rickyandmortypaging3.databinding.ModelEpisodeCarouselItemBinding
 import com.sisifos.rickyandmortypaging3.domain.models.Episode
-import com.sisifos.rickyandmortypaging3.inflateAdapterItem
+
 
 
 class EpisodeCarouselAdapter : PagingDataAdapter<Episode, EpisodeCarouselViewHolder>(REPO_COMPARATOR){
@@ -21,7 +22,9 @@ class EpisodeCarouselAdapter : PagingDataAdapter<Episode, EpisodeCarouselViewHol
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EpisodeCarouselViewHolder {
-        val binding = parent.inflateAdapterItem(ModelEpisodeCarouselItemBinding::inflate)
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = ModelEpisodeCarouselItemBinding.inflate(inflater, parent, false)
+        //val binding = parent.inflateAdapterItem(ModelEpisodeCarouselItemBinding::inflate)
         return EpisodeCarouselViewHolder(binding) { position ->
             onEpisodeCarouselItemClickListener?.invoke(position)
         }

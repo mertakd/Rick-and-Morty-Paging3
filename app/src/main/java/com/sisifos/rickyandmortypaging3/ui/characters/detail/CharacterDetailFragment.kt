@@ -13,16 +13,17 @@ import com.sisifos.rickyandmortypaging3.R
 import com.sisifos.rickyandmortypaging3.databinding.FragmentCharacterDetailBinding
 import com.sisifos.rickyandmortypaging3.ui.characters.detail.adapter.EpisodeCarouselAdapter
 import com.squareup.picasso.Picasso
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
-
+@AndroidEntryPoint
 class CharacterDetailFragment : Fragment(R.layout.fragment_character_detail) {
 
 
     private var _binding: FragmentCharacterDetailBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: CharacterDetailViewModel by viewModels()
+    val viewModel: CharacterDetailViewModel by viewModels<CharacterDetailViewModel>()
 
     private val args: CharacterDetailFragmentArgs by navArgs()
 
@@ -90,7 +91,7 @@ class CharacterDetailFragment : Fragment(R.layout.fragment_character_detail) {
 
 
 
-    var episodesCarouselItemSelectedAdapter = EpisodeCarouselAdapter().apply {
+    private var episodesCarouselItemSelectedAdapter = EpisodeCarouselAdapter().apply {
         setOnEpisodeItemClickListener { position ->
             val selectedCarouselEpisode = getItemAtPosition(position)
             selectedCarouselEpisode?.let {

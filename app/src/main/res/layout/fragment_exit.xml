@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <pl.droidsonroids.gif.GifImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/disco_light_square"
+        android:scaleType="centerCrop" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- exitImageView -->
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/exitImageView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:src="@drawable/portal_rick_and_morty"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- rickImageView -->
+
+
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/rickImageView"
+            android:layout_width="121dp"
+            android:layout_height="310dp"
+            android:src="@drawable/rick_twirk_transparent"
+            app:layout_constraintBottom_toBottomOf="@+id/exitImageView"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/mortyImageView"
+            android:layout_width="292dp"
+            android:layout_height="314dp"
+            android:layout_marginEnd="116dp"
+            android:layout_marginBottom="4dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/rm_dace_full_adobe"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

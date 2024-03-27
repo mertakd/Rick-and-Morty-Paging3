@@ -1,21 +1,15 @@
 package com.sisifos.rickyandmortypaging3.ui.episode.adapter
 
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.sisifos.rickyandmortypaging3.R
-import com.sisifos.rickyandmortypaging3.databinding.AdapterCharacterItemBinding
 import com.sisifos.rickyandmortypaging3.databinding.ModelEpisodeListItemBinding
 import com.sisifos.rickyandmortypaging3.databinding.ModelEpisodeListTitleBinding
-import com.sisifos.rickyandmortypaging3.domain.models.Character
-import com.sisifos.rickyandmortypaging3.domain.models.Episode
-import com.sisifos.rickyandmortypaging3.inflateAdapterItem
 import com.sisifos.rickyandmortypaging3.ui.episode.EpisodesUiModel
-import com.sisifos.rickyandmortypaging3.ui.characters.home.adapter.CharactersUiModel
-import com.sisifos.rickyandmortypaging3.ui.characters.home.adapter.CharactersViewHolder
+
 
 class EpisodesPagingAdapter : PagingDataAdapter<EpisodesUiModel, ViewHolder>(REPO_COMPARATOR) {
 
@@ -52,17 +46,18 @@ class EpisodesPagingAdapter : PagingDataAdapter<EpisodesUiModel, ViewHolder>(REP
         }
     }*/
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val inflater = LayoutInflater.from(parent.context)
         return when (viewType) {
             LIST_ITEM_VIEW_TYPE -> {
                 EpisodesViewHolder(
-                    parent.inflateAdapterItem(ModelEpisodeListItemBinding::inflate),
+                    ModelEpisodeListItemBinding.inflate(inflater, parent, false),
                     onEpisodeItemClickListener
                 )
             }
 
             HEADER_ITEM_VIEW_TYPE -> {
                 SeparatorViewHolder(
-                    parent.inflateAdapterItem(ModelEpisodeListTitleBinding::inflate)
+                    ModelEpisodeListTitleBinding.inflate(inflater,parent,false)
                 )
             }
 

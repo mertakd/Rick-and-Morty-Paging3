@@ -2,15 +2,22 @@ package com.sisifos.rickyandmortypaging3.ui.characters.detail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sisifos.rickyandmortypaging3.domain.models.Character
-import com.sisifos.rickyandmortypaging3.ui.characters.home.CharactersRepository
+import com.sisifos.rickyandmortypaging3.domain.repository.RickAndMortyRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class CharacterDetailViewModel: ViewModel() {
+@HiltViewModel
+class CharacterDetailViewModel @Inject constructor(
+    private val repository: RickAndMortyRepository,
+    private val savedStateHandle: SavedStateHandle
+): ViewModel() {
 
-    private val repository = CharactersRepository()
+
 
     private val _characterByIdLiveData = MutableLiveData<Character?>()
     val characterByIdLiveData: LiveData<Character?> = _characterByIdLiveData

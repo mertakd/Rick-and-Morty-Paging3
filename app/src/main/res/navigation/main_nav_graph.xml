@@ -70,14 +70,11 @@
 
     </dialog>
 
-
-
-
     <fragment
-        android:id="@+id/characterSearchFragment"
-        android:name="com.sisifos.rickyandmortypaging3.ui.search.CharacterSearchFragment"
-        android:label="CharacterSearchFragment"
-        tools:layout="@layout/fragment_character_search"/>
+        android:id="@+id/exitFragment"
+        android:name="com.sisifos.rickyandmortypaging3.ui.ExitFragment"
+        android:label="fragment_exit"
+        tools:layout="@layout/fragment_exit" />
 
 
 </navigation>

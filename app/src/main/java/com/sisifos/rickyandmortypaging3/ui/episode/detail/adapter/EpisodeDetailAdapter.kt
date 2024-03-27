@@ -1,11 +1,12 @@
 package com.sisifos.rickyandmortypaging3.ui.episode.detail.adapter
 
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import com.sisifos.rickyandmortypaging3.databinding.ModelCharacterListItemSquareBinding
 import com.sisifos.rickyandmortypaging3.domain.models.Character
-import com.sisifos.rickyandmortypaging3.inflateAdapterItem
+
 
 class EpisodeDetailAdapter : PagingDataAdapter<Character, EpisodeDetailViewHolder>(REPO_COMPARATOR){
 
@@ -13,7 +14,8 @@ class EpisodeDetailAdapter : PagingDataAdapter<Character, EpisodeDetailViewHolde
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EpisodeDetailViewHolder {
-        val binding = parent.inflateAdapterItem(ModelCharacterListItemSquareBinding::inflate)
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = ModelCharacterListItemSquareBinding.inflate(inflater,parent,false)
         return EpisodeDetailViewHolder(binding)
     }
 
