@@ -25,6 +25,7 @@ class EpisodeListFragment : Fragment(R.layout.fragment_episode_list) {
     private val binding get() = _binding!!
 
     private val viewModel: EpisodesViewModel by viewModels()
+    private val episodesAdapter by lazy { EpisodesPagingAdapter() }
 
 
     override fun onCreateView(
@@ -45,23 +46,8 @@ class EpisodeListFragment : Fragment(R.layout.fragment_episode_list) {
 
 
 
-
-        lifecycleScope.launch {
-            viewModel.getAllEpisodeStream().collectLatest { episodePagingData: PagingData<EpisodesUiModel> ->
-                episodesItemSelectedAdapter.submitData(episodePagingData)
-
-            }
-        }
-
-
-
-        binding.episodeRecyclerView.apply {
-            adapter = episodesItemSelectedAdapter
-            layoutManager = LinearLayoutManager(requireContext())
-        }
-
-
-
+        setupRecyclerView()
+        observeViewModel()
 
 
     }
@@ -70,18 +56,30 @@ class EpisodeListFragment : Fragment(R.layout.fragment_episode_list) {
 
 
 
-    private var episodesItemSelectedAdapter = EpisodesPagingAdapter().apply {
-        setOnEpisodeItemClickListener { position ->
-            val selectedEpisode = getItemAtPosition(position) as? EpisodesUiModel.Item
+    private fun setupRecyclerView() {
+        binding.episodeRecyclerView.apply {
+            adapter = episodesAdapter
+            layoutManager = LinearLayoutManager(requireContext())
+        }
+        episodesAdapter.setOnEpisodeItemClickListener { position ->
+            val selectedEpisode = episodesAdapter.getItemAtPosition(position) as? EpisodesUiModel.Item
             selectedEpisode?.let {
-                val episodeId = it
+                val action = EpisodeListFragmentDirections.actionEpisodeListFragmentToEpisodeDetailBottomSheetFragment(
+                    episodeId = it.episode.id
+                )
+                findNavController().navigate(action)
+            }
+        }
+    }
 
-                episodeId.let {
-                    val action = EpisodeListFragmentDirections.actionEpisodeListFragmentToEpisodeDetailBottomSheetFragment(
-                        episodeId = it.episode.id
-                    )
-                    findNavController().navigate(action)
-                }
+
+
+
+
+    private fun observeViewModel() {
+        lifecycleScope.launch {
+            viewModel.state.collect { state ->
+                episodesAdapter.submitData(state.episodeList ?: PagingData.empty())
             }
         }
     }
