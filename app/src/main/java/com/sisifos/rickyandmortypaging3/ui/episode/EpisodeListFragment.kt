@@ -4,15 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sisifos.rickyandmortypaging3.R
 import com.sisifos.rickyandmortypaging3.databinding.FragmentEpisodeListBinding
 import com.sisifos.rickyandmortypaging3.ui.episode.adapter.EpisodesPagingAdapter
+import com.sisifos.rickyandmortypaging3.ui.episode.footer.EpisodeLoadStateAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -50,6 +53,25 @@ class EpisodeListFragment : Fragment(R.layout.fragment_episode_list) {
         observeViewModel()
 
 
+
+        lifecycleScope.launch {
+            episodesAdapter.addLoadStateListener { combinedLoadStates ->
+                val errorState = combinedLoadStates.prepend
+                if (errorState is LoadState.Error) {
+                    // Handle errors here
+                    // For example, show a toast message
+                    Toast.makeText(
+                        requireContext(),
+                        "Woops : ${errorState.error.message}",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
+        }
+
+
+
+
     }
 
 
@@ -58,9 +80,13 @@ class EpisodeListFragment : Fragment(R.layout.fragment_episode_list) {
 
     private fun setupRecyclerView() {
         binding.episodeRecyclerView.apply {
-            adapter = episodesAdapter
             layoutManager = LinearLayoutManager(requireContext())
+            adapter = episodesAdapter.withLoadStateHeaderAndFooter(
+                header = EpisodeLoadStateAdapter { episodesAdapter.retry() },
+                footer = EpisodeLoadStateAdapter { episodesAdapter.retry() }
+            )
         }
+
         episodesAdapter.setOnEpisodeItemClickListener { position ->
             val selectedEpisode = episodesAdapter.getItemAtPosition(position) as? EpisodesUiModel.Item
             selectedEpisode?.let {
