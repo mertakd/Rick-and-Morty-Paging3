@@ -73,11 +73,7 @@ class CharacterListFragment : Fragment(R.layout.fragment_character_list) {
         uiActions: (UiAction) -> Unit
     ) {
         val charactersAdapter = CharactersPagingAdapter()
-        val header = CharactersLoadStateAdapter { charactersAdapter.retry() }
-        list.adapter = charactersAdapter.withLoadStateHeaderAndFooter(
-            header = header,
-            footer = CharactersLoadStateAdapter { charactersAdapter.retry() }
-        )
+
         bindSearch(
             uiState = uiState,
             onQueryChanged = uiActions
@@ -240,24 +236,36 @@ class CharacterListFragment : Fragment(R.layout.fragment_character_list) {
     }
 
     private fun setupRecyclerView(charactersAdapter: CharactersPagingAdapter) {
-        val gridLayoutManager = GridLayoutManager(requireContext(), 2)
-        gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-            override fun getSpanSize(position: Int): Int {
-                return when (charactersAdapter.getItemViewType(position)) {
-                    CharactersPagingAdapter.CHARACTERS_LIST_ITEM_VIEW_TYPE -> 1
-                    CharactersPagingAdapter.CHARACTERS_HEADER_ITEM_VIEW_TYPE -> 2
-                    else -> throw IllegalArgumentException("Unknown view type at position $position")
+
+        val footerAdapter = CharactersLoadStateAdapter{charactersAdapter.retry()}
+
+        val gridLayoutManager = GridLayoutManager(requireContext(), 2).apply {
+            spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                override fun getSpanSize(position: Int): Int {
+                    return if (position == charactersAdapter.itemCount && footerAdapter.itemCount > 0) {
+                        2 // Footer'ı kaplayacak şekilde iki sütun
+                    } else {
+                        when (charactersAdapter.getItemViewType(position)) {
+                            CharactersPagingAdapter.CHARACTERS_LIST_ITEM_VIEW_TYPE -> 1
+                            CharactersPagingAdapter.CHARACTERS_HEADER_ITEM_VIEW_TYPE -> 2
+                            else -> throw IllegalArgumentException("Unknown view type at position $position")
+                        }
+                    }
                 }
             }
         }
-        binding.list.layoutManager = gridLayoutManager
-        binding.list.adapter = charactersAdapter
+
+        with(binding.list) {
+            layoutManager = gridLayoutManager
+            adapter = charactersAdapter.withLoadStateFooter(footer = footerAdapter)
+            setHasFixedSize(true)
+            //addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+        }
     }
 
 
-    private fun FragmentCharacterListBinding.setupItemSelectedListener(charactersAdapter: CharactersPagingAdapter) {
 
-    }
+
 
 
 
