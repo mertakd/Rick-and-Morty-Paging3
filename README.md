@@ -1,10 +1,11 @@
 # Rick And Morty Paging3
+It is a Rick And Morty application built mostly on Paging3 and Flow structures.
 ## Screenshots
 ### Paging3
-<img src="https://i.imgur.com/s2L12DE.png" width="300">
+<img src="https://i.imgur.com/s2L12DE.png" width="800">
 
 ### UI Action
-<img src="https://i.imgur.com/D9e7bgf.png" width="300">
+<img src="https://i.imgur.com/D9e7bgf.png" width="800">
 
 | Home | Detail | Bottom Sheet |
 | ---- | ------ | ------------ |
@@ -15,6 +16,11 @@
 | ![Loading state in a Footer](https://i.imgur.com/aOMmAmt.png) | ![Loading state in a Fragment](https://i.imgur.com/Too7FYO.png) |
 
 
+| Demo                                     | 
+|------------------------------------------| 
+| ![Demo](https://i.imgur.com/XYcJuOx.gifv) | 
+
+
 
 ## Projects Features
 - [Kotlin Coroutines](https://developer.android.com/kotlin/coroutines) + [Flow](https://developer.android.com/kotlin/flow)
@@ -22,7 +28,7 @@
 - [MVVM](https://developer.android.com/topic/architecture#modern-app-architecture)
 - [ViewBinding](https://developer.android.com/topic/libraries/view-binding)
 - [Hilt](https://developer.android.com/training/dependency-injection/hilt-android) - Hilt is a dependency injection library for Android that reduces the boilerplate of doing manual dependency injection in your project
-- [Paging](https://developer.android.com/topic/libraries/architecture/paging/v3-overview) - (Paging Error State/ Displaying the loading state in a footer, Displaying the loading state in Fragment, List separators) - The Paging library makes it easier for you to load data incrementally and gracefully within your app's UI
+- [Paging3](https://developer.android.com/topic/libraries/architecture/paging/v3-migration) - (Displaying the loading state in a footer, Displaying the loading state in Fragment, List separators) - The Paging library makes it easier for you to load data incrementally and gracefully within your app's UI
 - [Navigation](https://developer.android.com/guide/navigation)
 - [Retrofit](https://github.com/square/retrofit) - A type-safe HTTP client for Android and Java.
 - [Moshi](https://github.com/square/moshi) - A modern JSON library for Android, Java and Kotlin
