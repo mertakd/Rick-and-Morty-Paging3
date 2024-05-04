@@ -1,4 +1,4 @@
-package com.sisifos.rickyandmortypaging3.ui.characters.home.adapter
+package com.sisifos.rickyandmortypaging3.ui.characters.home.adapter.footer
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

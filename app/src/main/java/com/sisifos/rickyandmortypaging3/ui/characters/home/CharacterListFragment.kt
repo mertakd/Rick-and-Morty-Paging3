@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sisifos.rickyandmortypaging3.R
 import com.sisifos.rickyandmortypaging3.databinding.FragmentCharacterListBinding
-import com.sisifos.rickyandmortypaging3.ui.characters.home.adapter.CharactersLoadStateAdapter
+import com.sisifos.rickyandmortypaging3.ui.characters.home.adapter.footer.CharactersLoadStateAdapter
 import com.sisifos.rickyandmortypaging3.ui.characters.home.adapter.CharactersPagingAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.Flow
@@ -126,14 +126,15 @@ class CharacterListFragment : Fragment(R.layout.fragment_character_list) {
 
     private fun FragmentCharacterListBinding.updateRepoListFromInput(
         onQueryChanged: (UiAction.Search) -> Unit,
+
     ) {
         searchRepo.text.trim().let { trimmedText ->
             if (trimmedText.isNotEmpty()) {
                 list.scrollToPosition(0)
                 onQueryChanged(UiAction.Search(query = trimmedText.toString()))
             } else {
-                // düzenlenecek !
-                onQueryChanged(UiAction.Search(query = DEFAULT_QUERY))
+                list.scrollToPosition(0)
+                onQueryChanged(UiAction.Search(query = ""))
             }
         }
     }
@@ -157,21 +158,8 @@ class CharacterListFragment : Fragment(R.layout.fragment_character_list) {
         onScrollChanged: (UiAction.Scroll) -> Unit
     ) {
         setupRecyclerView(charactersAdapter)
-        charactersAdapter.apply {
-            setOnCharacterItemClickListener { position ->
-                val charactersUiModel = getItemAtPosition(position) as? UiModel.CharacterItem
-                charactersUiModel?.let {
-                    val characterId = it.character.id
+        characterItemClickListener(charactersAdapter)
 
-                    characterId.let {
-                        val action = CharacterListFragmentDirections.actionCharacterListFragmentToCharacterDetailFragment(
-                            characterId = it
-                        )
-                        findNavController().navigate(action)
-                    }
-                }
-            }
-        }
 
         retryButton.setOnClickListener { charactersAdapter.retry() }
         list.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -263,6 +251,17 @@ class CharacterListFragment : Fragment(R.layout.fragment_character_list) {
         }
     }
 
+
+    private fun characterItemClickListener(charactersAdapter: CharactersPagingAdapter){
+        charactersAdapter.setOnCharacterItemClickListener { position ->
+            val characterUiModel = charactersAdapter.getItemAtPosition(position) as? UiModel.CharacterItem
+            characterUiModel?.let {
+                val characterId = it.character.id
+                val action = CharacterListFragmentDirections.actionCharacterListFragmentToCharacterDetailFragment(characterId)
+                findNavController().navigate(action)
+            }
+        }
+    }
 
 
 

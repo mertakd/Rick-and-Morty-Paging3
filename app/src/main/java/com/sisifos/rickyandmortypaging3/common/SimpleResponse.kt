@@ -2,7 +2,7 @@ package com.sisifos.rickyandmortypaging3.common
 import retrofit2.Response
 
 
-// Neden mi Response State'i proje de kullanımıyorum? Cevabı Medium yazımda.
+// Paging3 bu durumları kendi yönettiği için, artık bu sınıfı kullanmamıza gerek kalmadı.
 data class SimpleResponse<T>(
     val status: Status,
     val data: Response<T>?,

@@ -1,6 +1,5 @@
-package com.sisifos.rickyandmortypaging3.ui.characters.home.adapter
+package com.sisifos.rickyandmortypaging3.ui.characters.home.adapter.footer
 
-import android.util.Log
 import android.view.ViewGroup
 import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter

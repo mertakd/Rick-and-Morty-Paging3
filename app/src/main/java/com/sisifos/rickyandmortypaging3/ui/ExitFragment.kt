@@ -42,18 +42,18 @@ class ExitFragment : Fragment() {
 
 
     private fun startExitAnimation() {
-        // Portal animasyonu için bekleme
+
         CoroutineScope(Main).launch {
-            delay(10000) // 20 saniye bekle
+            delay(10000)
             val portalAnimation = AnimationUtils.loadAnimation(context, R.anim.portal_animation)
             portalAnimation.duration = 25000 // 25 saniye
             portalAnimation.fillAfter = true
             binding.exitImageView.startAnimation(portalAnimation)
         }
 
-        // Rick animasyonu için bekleme
+
         CoroutineScope(Main).launch {
-            delay(20000) // 20 saniye bekle
+            delay(20000)
             val rickAnimation = AnimationUtils.loadAnimation(context, R.anim.rick_animation)
             rickAnimation.duration = 3000
             rickAnimation.fillAfter = true
@@ -61,19 +61,19 @@ class ExitFragment : Fragment() {
         }
 
         CoroutineScope(Main).launch {
-            delay(20000) // 20 saniye bekle
+            delay(20000)
             val mortyAnimation = AnimationUtils.loadAnimation(context, R.anim.morty_animation)
             mortyAnimation.duration = 3000
             mortyAnimation.fillAfter = true
             binding.mortyImageView.startAnimation(mortyAnimation)
         }
 
-        // Çıkış sesini çal
+
         playExitSound()
 
-        // Fragment'in kapatılmasını ayarla
+
         CoroutineScope(Main).launch {
-            delay(30000) // 50 saniye bekle
+            delay(30000)
             requireActivity().finish()
         }
     }
@@ -84,7 +84,7 @@ class ExitFragment : Fragment() {
         val mediaPlayer = MediaPlayer.create(requireContext(), R.raw.motive_full_edit)
         mediaPlayer.start()
 
-        // Ses dosyasının çalması tamamlandığında veya durdurulduğunda, MediaPlayer'ı serbest bırak
+
         mediaPlayer.setOnCompletionListener {
             mediaPlayer.release()
         }
