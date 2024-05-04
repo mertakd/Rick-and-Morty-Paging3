@@ -46,8 +46,7 @@
             android:layout_width="220dp"
             android:layout_height="220dp"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="25dp"
             android:elevation="4dp"
             android:padding="1dp"
             android:scaleType="centerCrop"
@@ -63,7 +62,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -79,7 +78,8 @@
             android:text="Episodes"
             android:layout_marginStart="16dp"
             android:textSize="24sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            />
 
         <com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
             android:id="@+id/carouselRecyclerView"

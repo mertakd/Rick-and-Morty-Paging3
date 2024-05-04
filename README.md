@@ -1,4 +1,12 @@
 # Rick And Morty Paging3
+![Paging3](RickAndMortyPagingFeatureExtra/app/src/main/assets/paging_task.png)
+![Paging3 + UI Action](RickAndMortyPagingFeatureExtra/app/src/main/assets/pagingUIAction.png)
+![Home](RickAndMortyPagingFeatureExtra/app/src/main/assets/home.png)
+![Detail](RickAndMortyPagingFeatureExtra/app/src/main/assets/detail.png)
+![Bottom Sheet](RickAndMortyPagingFeatureExtra/app/src/main/assets/bottom_detail.png)
+![Loading state in a Footer](RickAndMortyPagingFeatureExtra/app/src/main/assets/footer_error.png)
+![Loading state in a Fragment](RickAndMortyPagingFeatureExtra/app/src/main/assets/fragment_error.png)
+
 ## Projects Features
 - Kotlin Coroutines + Flow
 - UI State + UI Action
