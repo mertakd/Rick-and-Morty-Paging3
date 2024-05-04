@@ -1,18 +1,20 @@
 # Rick And Morty Paging3
-![Paging3](https://github.com/mertakd/RickyAndMortyPaging3/blob/cce336db6a59daf802d35a9f07e93673b7f19f94/app/src/main/assets/paging_task.png
-https://github.com/mertakd/Ricky-and-Morty-Paging3/blob/cce336db6a59daf802d35a9f07e93673b7f19f94/app/src/main/assets/paging_task.png)
-![Paging3 + UI Action](https://github.com/mertakd/RickyAndMortyPaging3/blob/cce336db6a59daf802d35a9f07e93673b7f19f94/app/src/main/assets/pagingUIAction.png
-https://github.com/mertakd/Ricky-and-Morty-Paging3/blob/cce336db6a59daf802d35a9f07e93673b7f19f94/app/src/main/assets/pagingUIAction.png)
-![Home](https://github.com/mertakd/RickyAndMortyPaging3/blob/cce336db6a59daf802d35a9f07e93673b7f19f94/app/src/main/assets/home.png
-https://github.com/mertakd/Ricky-and-Morty-Paging3/blob/cce336db6a59daf802d35a9f07e93673b7f19f94/app/src/main/assets/home.png)
-![Detail](https://github.com/mertakd/RickyAndMortyPaging3/blob/cce336db6a59daf802d35a9f07e93673b7f19f94/app/src/main/assets/detail.png
-https://github.com/mertakd/Ricky-and-Morty-Paging3/blob/cce336db6a59daf802d35a9f07e93673b7f19f94/app/src/main/assets/detail.png)
-![Bottom Sheet](https://github.com/mertakd/RickyAndMortyPaging3/blob/cce336db6a59daf802d35a9f07e93673b7f19f94/app/src/main/assets/bottom_detail.png
-https://github.com/mertakd/Ricky-and-Morty-Paging3/blob/cce336db6a59daf802d35a9f07e93673b7f19f94/app/src/main/assets/bottom_detail.png)
-![Loading state in a Footer](https://github.com/mertakd/RickyAndMortyPaging3/blob/cce336db6a59daf802d35a9f07e93673b7f19f94/app/src/main/assets/footer_error.png
-https://github.com/mertakd/Ricky-and-Morty-Paging3/blob/cce336db6a59daf802d35a9f07e93673b7f19f94/app/src/main/assets/footer_error.png)
-![Loading state in a Fragment](https://github.com/mertakd/RickyAndMortyPaging3/blob/cce336db6a59daf802d35a9f07e93673b7f19f94/app/src/main/assets/fragment_error.png
-https://github.com/mertakd/Ricky-and-Morty-Paging3/blob/cce336db6a59daf802d35a9f07e93673b7f19f94/app/src/main/assets/fragment_error.png)
+## Screenshots
+### Paging3
+<img src="https://i.imgur.com/s2L12DE.png" width="300">
+
+### UI Action
+<img src="https://i.imgur.com/D9e7bgf.png" width="300">
+
+| Home | Detail | Bottom Sheet |
+| ---- | ------ | ------------ |
+| ![Home](https://i.imgur.com/Dkdz0zL.png) | ![Detail](https://i.imgur.com/R1omojJ.png) | ![Bottom Sheet](https://i.imgur.com/U74rTRe.png) |
+
+| Loading state in a Footer | Loading state in a Fragment |
+| -------------------------- | ---------------------------- |
+| ![Loading state in a Footer](https://i.imgur.com/aOMmAmt.png) | ![Loading state in a Fragment](https://i.imgur.com/Too7FYO.png) |
+
+
 
 ## Projects Features
 - [Kotlin Coroutines](https://developer.android.com/kotlin/coroutines) + [Flow](https://developer.android.com/kotlin/flow)
