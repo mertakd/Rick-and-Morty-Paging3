@@ -18,7 +18,7 @@ It is a Rick And Morty application built mostly on Paging3 and Flow structures.
 
 | Demo                                     | 
 |------------------------------------------| 
-| ![Demo](https://i.imgur.com/XYcJuOx.gifv) | 
+| ![Demo](https://i.imgur.com/XYcJuOx.gif) | 
 
 
 
