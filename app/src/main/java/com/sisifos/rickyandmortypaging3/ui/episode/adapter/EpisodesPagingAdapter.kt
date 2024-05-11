@@ -24,27 +24,7 @@ class EpisodesPagingAdapter : PagingDataAdapter<EpisodesUiModel, ViewHolder>(REP
 
 
 
-    /*override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = parent.inflateAdapterItem(ModelEpisodeListItemBinding::inflate)
-        return EpisodesViewHolder(binding) {position ->
-            onEpisodeItemClickListener?.invoke(position)
-        }
-    }*/
-    /*override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return when (viewType) {
-            R.layout.model_episode_list_item -> {
-                val binding =
-                    ModelEpisodeListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-                EpisodesViewHolder(binding, onEpisodeItemClickListener)
-            }
-            R.layout.model_episode_list_title -> {
-                val binding =
-                    ModelEpisodeListTitleBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-                SeparatorViewHolder(binding)
-            }
-            else -> throw IllegalArgumentException("Unknown view type: $viewType")
-        }
-    }*/
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         return when (viewType) {
@@ -105,18 +85,11 @@ class EpisodesPagingAdapter : PagingDataAdapter<EpisodesUiModel, ViewHolder>(REP
 
     companion object {
 
-        private const val LIST_ITEM_VIEW_TYPE = 0
-        private const val HEADER_ITEM_VIEW_TYPE = 1
+        const val LIST_ITEM_VIEW_TYPE = 0
+        const val HEADER_ITEM_VIEW_TYPE = 1
         private const val INVALID_VIEW_TYPE = -1
 
-       /* private val REPO_COMPARATOR = object : DiffUtil.ItemCallback<Episode>() {
 
-            override fun areItemsTheSame(oldItem: Episode, newItem: Episode): Boolean =
-                oldItem.id == newItem.id
-
-            override fun areContentsTheSame(oldItem: Episode, newItem: Episode): Boolean =
-                oldItem == newItem
-        }*/
 
 
 

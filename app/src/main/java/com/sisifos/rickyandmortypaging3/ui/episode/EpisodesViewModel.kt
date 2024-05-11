@@ -1,7 +1,7 @@
 package com.sisifos.rickyandmortypaging3.ui.episode
 
 
-import androidx.lifecycle.SavedStateHandle
+
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
@@ -12,9 +12,12 @@ import com.sisifos.rickyandmortypaging3.domain.repository.RickAndMortyRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onCompletion
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -22,18 +25,22 @@ import javax.inject.Inject
 @HiltViewModel
 class EpisodesViewModel @Inject constructor(
     private val repository: RickAndMortyRepository,
-    private val savedStateHandle: SavedStateHandle
 ): ViewModel() {
 
 
+
+
+
     private val _state = MutableStateFlow(EpisodeListState())
-    val state: StateFlow<EpisodeListState> get() = _state
+    val state: StateFlow<EpisodeListState>
+        get() = _state
 
 
     private val episodeFlow: Flow<PagingData<EpisodesUiModel>> by lazy {
         getAllEpisodeStream()
             .cachedIn(viewModelScope)
     }
+
 
     init {
         viewModelScope.launch {
@@ -42,6 +49,10 @@ class EpisodesViewModel @Inject constructor(
             }
         }
     }
+
+
+
+
 
 
 
@@ -97,7 +108,7 @@ sealed class EpisodesUiModel {
 
 
 
-data class EpisodeListState(val episodeList: PagingData<EpisodesUiModel>? = PagingData.empty() ) {}
+data class EpisodeListState(val episodeList: PagingData<EpisodesUiModel>? = PagingData.empty() )
 
 
 

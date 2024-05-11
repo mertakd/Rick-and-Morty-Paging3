@@ -182,8 +182,7 @@ class CharacterListFragment : Fragment(R.layout.fragment_character_list) {
             notLoading,
             hasNotScrolledForCurrentSearch,
             Boolean::and
-        )
-            .distinctUntilChanged()
+        ).distinctUntilChanged()
 
         lifecycleScope.launch {
             pagingData.collectLatest(charactersAdapter::submitData)
@@ -246,7 +245,7 @@ class CharacterListFragment : Fragment(R.layout.fragment_character_list) {
         with(binding.list) {
             layoutManager = gridLayoutManager
             adapter = charactersAdapter.withLoadStateFooter(footer = footerAdapter)
-            setHasFixedSize(true)
+            //setHasFixedSize(true)
             //addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
         }
     }
@@ -281,6 +280,8 @@ class CharacterListFragment : Fragment(R.layout.fragment_character_list) {
         super.onDestroyView()
         _binding = null
     }
+
+
 
 }
 
