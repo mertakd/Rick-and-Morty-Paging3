@@ -44,33 +44,25 @@ class EpisodeDetailBottomSheetFragment : BottomSheetDialogFragment() {
 
         binding.bottomSheetRecyclerView.adapter = episodeDetailAdapter
 
-        viewModel.episodeLiveData.observe(viewLifecycleOwner){ episode ->
-            if (episode == null){
-                // todo handler error
-                return@observe
-            }
 
-            binding.episodeNameTextView.text = episode.name
-            binding.episodeAirDateTextView.text = episode.airDate
-            binding.episodeNumberTextView.text = episode.getFormattedSeason()
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.episodeFlow.collect { episode ->
+                if (episode == null) {
+                    // todo handler error
+                    return@collect
+                }
 
+                binding.episodeNameTextView.text = episode.name
+                binding.episodeAirDateTextView.text = episode.airDate
+                binding.episodeNumberTextView.text = episode.getFormattedSeason()
 
-
-            lifecycleScope.launch {
-                if (episode!!.characters.isNotEmpty()){
+                if (episode.characters.isNotEmpty()) {
                     val character = episode.characters
                     val pagingData = PagingData.from(character)
                     episodeDetailAdapter.submitData(pagingData)
                 }
             }
-
-
-
-
-
-
         }
-
 
         viewModel.fetchEpisode(safeArgs.episodeId)
     }

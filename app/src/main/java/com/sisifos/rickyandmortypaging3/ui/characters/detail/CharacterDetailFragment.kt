@@ -16,88 +16,58 @@ import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
+
 @AndroidEntryPoint
 class CharacterDetailFragment : Fragment(R.layout.fragment_character_detail) {
-
 
     private var _binding: FragmentCharacterDetailBinding? = null
     private val binding get() = _binding!!
 
-    val viewModel: CharacterDetailViewModel by viewModels<CharacterDetailViewModel>()
-
+    private val viewModel: CharacterDetailViewModel by viewModels()
     private val args: CharacterDetailFragmentArgs by navArgs()
-
-
-
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentCharacterDetailBinding.bind(view)
-
-
-
-
 
         binding.apply {
             carouselRecyclerView.adapter = episodesCarouselItemSelectedAdapter
             carouselRecyclerView.set3DItem(true)
             carouselRecyclerView.setAlpha(true)
             carouselRecyclerView.setInfinite(false)
-
         }
 
-        viewModel.characterByIdLiveData.observe(viewLifecycleOwner) { character ->
-            if (character == null) {
-                // todo handle error
-                return@observe
-            }
-
-            Picasso.get().load(character.image).into(binding.headerImageView)
-            binding.nameTextView.text = character.name
-            binding.aliveTextView.text = character.status
-            binding.originTextDes.text = character.origin.name
-            binding.speciesTextDes.text = character.species
-            binding.genderTextDes.text = character.gender
-
-
-
-
-            lifecycleScope.launch{
-                if(character!!.episodeList.isNotEmpty()){
-
-                    val episodes= character.episodeList
-
-                    val pagingData = PagingData.from(episodes)
-
-                    episodesCarouselItemSelectedAdapter.submitData(pagingData)
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.characterFlow.collect { character ->
+                if (character == null) {
+                    // todo handle error
+                    return@collect
                 }
 
+                Picasso.get().load(character.image).into(binding.headerImageView)
+                binding.nameTextView.text = character.name
+                binding.aliveTextView.text = character.status
+                binding.originTextDes.text = character.origin.name
+                binding.speciesTextDes.text = character.species
+                binding.genderTextDes.text = character.gender
+
+                if (character.episodeList.isNotEmpty()) {
+                    val episodes = character.episodeList
+                    val pagingData = PagingData.from(episodes)
+                    episodesCarouselItemSelectedAdapter.submitData(pagingData)
+                }
             }
-
-
-
         }
 
         viewModel.fetchCharacter(args.characterId)
-
-
-        
-
-
-
     }
 
-
-
-
-    private var episodesCarouselItemSelectedAdapter = EpisodeCarouselAdapter().apply {
+    private val episodesCarouselItemSelectedAdapter = EpisodeCarouselAdapter().apply {
         setOnEpisodeItemClickListener { position ->
             val selectedCarouselEpisode = getItemAtPosition(position)
             selectedCarouselEpisode?.let {
                 val episodeId = it
-
-                episodeId.let {episodeClickedId ->
+                episodeId.let { episodeClickedId ->
                     val action = MainNavGraphDirections.actionGlobalToEpisodeDetailBottomSheetFragment(
                         episodeId = episodeClickedId.id
                     )
@@ -107,9 +77,10 @@ class CharacterDetailFragment : Fragment(R.layout.fragment_character_detail) {
         }
     }
 
-
-
-
-
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
+
+

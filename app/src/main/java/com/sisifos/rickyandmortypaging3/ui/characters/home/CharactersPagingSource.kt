@@ -2,9 +2,12 @@ package com.sisifos.rickyandmortypaging3.ui.characters.home
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import com.sisifos.rickyandmortypaging3.common.Constants.STARTING_PAGE_INDEX
 import com.sisifos.rickyandmortypaging3.domain.mappers.CharacterMapper
 import com.sisifos.rickyandmortypaging3.domain.models.Character
 import com.sisifos.rickyandmortypaging3.network.RickAndMortyService
+import retrofit2.HttpException
+import java.io.IOException
 
 
 class CharactersPagingSource(
@@ -14,9 +17,12 @@ class CharactersPagingSource(
 
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Character> {
+
         try {
-            val pageNumber = params.key ?: 1
-            val previousKey = if (pageNumber == 1) null else pageNumber - 1
+
+            val pageNumber = params.key ?: STARTING_PAGE_INDEX
+            val previousKey = if (pageNumber == STARTING_PAGE_INDEX) null else pageNumber.minus(1)
+
 
             val charactersResponse = service.getAllCharactersPage(
                 characterName = userSearch,
@@ -32,9 +38,13 @@ class CharactersPagingSource(
                 prevKey = previousKey,
                 nextKey = getPageIndexFromNext(charactersResponse.info.next)
             )
-        } catch (e: Exception) {
-            return LoadResult.Error(e)
+
+        } catch (exception: IOException) {
+            return LoadResult.Error(exception)
+        } catch (exception: HttpException) {
+            return LoadResult.Error(exception)
         }
+
     }
 
 

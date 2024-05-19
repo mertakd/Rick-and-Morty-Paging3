@@ -8,6 +8,9 @@ import androidx.lifecycle.viewModelScope
 import com.sisifos.rickyandmortypaging3.domain.models.Episode
 import com.sisifos.rickyandmortypaging3.domain.repository.RickAndMortyRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -20,19 +23,21 @@ class EpisodeDetailViewModel @Inject constructor(
 
 
 
-    private var _episodeLiveData = MutableLiveData<Episode>()
-    val episodeLiveData: LiveData<Episode> = _episodeLiveData
-
+    private val _episodeFlow = MutableStateFlow<Episode?>(null)
+    val episodeFlow: Flow<Episode?> = _episodeFlow.asStateFlow()
 
     fun fetchEpisode(episodeId: Int) {
         viewModelScope.launch {
             try {
                 val episode = repository.getEpisodeById(episodeId)
-                _episodeLiveData.postValue(episode)
+                _episodeFlow.value = episode
             } catch (e: Exception) {
                 Log.e("EpisodeDetailViewModel", "Error fetching episode: $e")
             }
         }
     }
+
+
+
 
 }
